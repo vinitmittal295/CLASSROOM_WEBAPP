@@ -1,0 +1,10 @@
+const express=require("express")
+const router=express.Router()
+const teachercontrollers=require("../controllers/teacher")
+// const VerifyAuth=require("../middleware/VerifyAuth")
+router.post("/post",teachercontrollers.CreateTeacher)
+router.get("/get",teachercontrollers.getAllTeacher)
+router.get("/:id",teachercontrollers.getOneTeacher)
+router.patch("/:id",teachercontrollers.updateTeacher)
+router.delete("/:id",teachercontrollers.deleteTeacher)
+module.exports=router
