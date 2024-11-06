@@ -11,7 +11,7 @@ exports.CreateStudent=async(req,res)=>{
 
 }
 exports.getAllstudent=async(req,res)=>{
-    const user=await Studentdata.find()
+    const user=await Studentdata.find().populate("batchName")
     res.status(200).json(user)
 }
 exports.getOneStudent=async(req,res)=>{

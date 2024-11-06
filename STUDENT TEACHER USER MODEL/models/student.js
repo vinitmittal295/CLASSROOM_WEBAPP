@@ -11,8 +11,8 @@ const studentSchema=new mongoose.Schema(
         fee:{type:String,require:true},
         gender:{type:String,require:true},
         rollno:{type:String,require:true},
-        batchname:{type:mongoose.Schema.Types.ObjectId,
-            ref:"class"
+        batchName:{type:mongoose.Schema.Types.ObjectId,
+            ref:"batch"
             },
         joindate:{type:Date,require:true},
 

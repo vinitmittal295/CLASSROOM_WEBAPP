@@ -1,5 +1,6 @@
 const express =require("express")
 const mongoose=require("mongoose")
+const colors =require("colors")
 
 const app =express()
 app.use(express.json())
@@ -11,7 +12,7 @@ app.use(cors())
 const mongo_url="mongodb+srv://vinitmittal295:1234@cluster0.yohx5ud.mongodb.net/classroom"
 
 mongoose.connect(mongo_url).then(()=>{
-    console.log("databse connected")
+    console.log(`databse connected`.blue)
 })
 .catch((error)=>{
     console.log(error)
@@ -35,5 +36,5 @@ const userRoutes=require("./routers/user")
 app.use("/user",userRoutes)
 const port =3005
 app.listen(port,()=>{
-    console.log(`server on ${port}`)
+    console.log(`server  running on ${port}`.yellow)
 })

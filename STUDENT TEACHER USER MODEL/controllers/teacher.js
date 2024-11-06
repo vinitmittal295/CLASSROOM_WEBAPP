@@ -9,7 +9,7 @@ exports.CreateTeacher=async(req,res)=>{
 
 }
 exports.getAllTeacher=async(req,res)=>{
-    const user=await teacherData.find()
+    const user=await teacherData.find().populate("batchName")
     res.status(200).json(user)
 }
 exports.getOneTeacher=async(req,res)=>{

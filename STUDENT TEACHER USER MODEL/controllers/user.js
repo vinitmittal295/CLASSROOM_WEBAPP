@@ -36,7 +36,7 @@ exports.userLogin=async(req,res)=>{
     if(!match){
         return res.status(400).json({message:"invalid password"})
     }
-    const token=jwt.sign({id:existingUser._id}, secret, {expiresIn:"1h"})
+    const token=jwt.sign({id:existingUser._id}, secret, {expiresIn:"30d"})
 
     res.json({token,existingUser})
 }
