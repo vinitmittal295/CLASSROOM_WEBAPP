@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,9 +12,10 @@ const Student = () => {
   const[fee,setFee]=useState('')
   const[gender,setGender]=useState('')
   const[rollno,setRollno]=useState('')
-  const[batchname,setBatchName]=useState('')
+  const[batchName,setBatchName]=useState('')
   const[joindate,setJoinDate]=useState("")
   const[address,setAddress]=useState("")
+  const [classes,setClasses]=useState([])
 
   const navigate=useNavigate()
 
@@ -26,10 +27,12 @@ const Student = () => {
     fee,
     gender,
     rollno,
-    batchname,
+    batchName,
     joindate,
     address
   }
+
+
   const handleSubmit=async(e)=>{
     e.preventDefault()
     const res=await axios.post("http://localhost:3005/students/post",data)
@@ -39,6 +42,19 @@ const Student = () => {
       navigate("/studentDataShow")
     }
     
+  }
+  useEffect(()=>{
+    classFetch()
+  },[])
+
+  const classFetch=async()=>{
+    const response=await axios.get("http://localhost:3005/class/getall")
+    console.log(response.data);
+    setClasses(response.data)
+  }
+
+  const handleBatchselect=(e)=>{
+    setBatchName(e.target.value)
   }
   
   return (
@@ -80,19 +96,15 @@ const Student = () => {
 
   <div className="mb-3">
     <label htmlFor="exampleInputPassword1" className="form-label">batchname</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" value={batchname} onChange={(e)=>setBatchName(e.target.value)} />
+    <select onChange={handleBatchselect} value={batchName}>
+      <option value="">select batch</option>
+      {
+        classes.map((item)=>(
+          <option key={item.id} value={item._id}>{item.batchName}</option>
+        ))
+      }
+    </select>
   </div>
-
-
-{/* <label>Batch Name:</label>
-                    <select onChange={handleBatchselect} value={selectedbatch}>
-                    <option value="" >select batch</option>
-                    {
-                        classes.map((item)=>(
-                            <option key={item.id} value={item._id}> {item.batchName}</option>
-                        ))
-                    }
-                   </select> */}
 
   <div className="mb-3">
     <label htmlFor="exampleInputPassword1" className="form-label">joindate</label>

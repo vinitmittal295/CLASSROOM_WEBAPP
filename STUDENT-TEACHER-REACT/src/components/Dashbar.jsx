@@ -1,17 +1,20 @@
 
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import "./Dashbar.css"; 
 import "./Dashbar.css" // Custom CSS for additional styling
+// import Dashboard from './Dashboard';
+import Dashboard from './Dashboard';
 
 const Dashbar = () => {
   return (
     <div className="dashbar-container">
+      <div className="container mt-4">
+        <h1 className="dashboard-title">Welcome to the Classroom</h1>
+        
+      </div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            <i className="fas fa-tachometer-alt"></i> Dashboard
-          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -81,6 +84,11 @@ const Dashbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="/Dashboard">
+                  <i className="fas fa-sign-in-alt"></i> Dashboard
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/signup">
                   <i className="fas fa-user-plus"></i> Signup
                 </Link>
@@ -89,36 +97,7 @@ const Dashbar = () => {
           </div>
         </div>
       </nav>
-      <div className="container mt-4">
-        <h1 className="dashboard-title">Welcome to the Admin Dashboard</h1>
-        <div className="row mt-5">
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card shadow-lg">
-              <div className="card-body text-center">
-                <i className="fas fa-chalkboard-teacher fa-3x text-primary mb-3"></i>
-
-                
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card shadow-lg">
-              <div className="card-body text-center">
-                <i className="fas fa-users fa-3x text-success mb-3"></i>
-        
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card shadow-lg">
-              <div className="card-body text-center">
-                <i className="fas fa-user-graduate fa-3x text-danger mb-3"></i>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

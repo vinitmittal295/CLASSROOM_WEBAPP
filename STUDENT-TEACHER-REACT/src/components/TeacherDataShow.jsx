@@ -15,8 +15,10 @@ const TeacherDataShow = () => {
     const fetch=async()=>{
         
         const token=localStorage.getItem('token')
-        const res=await axios.get("http://localhost:3005/teachers/get",{Headers:{'Authorization':`Bearer ${token}`}})
-        console.log(res,token);
+        console.log(`>>>>>>>>>VerifyAuth`,token);
+        
+        const res=await axios.get("http://localhost:3005/teachers/get",{headers:{'Authorization':`Bearer ${token}`}})
+        console.log(`respone data is coming with token`,res.data,token);
         setData(res.data)
         
     }
@@ -24,7 +26,7 @@ const TeacherDataShow = () => {
     const getdetails=async(id)=>{
       const token=localStorage.getItem('token')
         console.log(">>>id >>>",id)
-        const res=await axios.get(`http://localhost:3005/teachers/${id}`,{Headers:{'Authorization':`Bearer ${token}`}})
+        const res=await axios.get(`http://localhost:3005/teachers/${id}`,{headers:{'Authorization':`Bearer ${token}`}})
         console.log(res.data)
         setView(res.data)
         setModelView(true)
@@ -37,7 +39,7 @@ const TeacherDataShow = () => {
     const deletedata=async(id)=>{
       const token=localStorage.getItem('token')
       console.log(id)
-      const res=await axios.delete(`http://localhost:3005/teachers/${id}`,{Headers:{'Authorization':`Bearer ${token}`}})
+      const res=await axios.delete(`http://localhost:3005/teachers/${id}`,{headers:{'Authorization':`Bearer ${token}`}})
       setDelet(res.data)
       fetch()
 
