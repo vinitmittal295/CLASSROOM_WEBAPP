@@ -1,25 +1,24 @@
-import axios from 'axios'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/style.css';  // Import the custom styles
 
 const Student = () => {
-  const[name,setName]=useState('')
-  const[email,setEmail]=useState('')
-  const[phone,setPhone]=useState('')  
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [qualification, setQualification] = useState('');
+  const [fee, setFee] = useState('');
+  const [gender, setGender] = useState('');
+  const [rollno, setRollno] = useState('');
+  const [batchName, setBatchName] = useState('');
+  const [joindate, setJoinDate] = useState('');
+  const [address, setAddress] = useState('');
+  const [classes, setClasses] = useState([]);
 
-  const[qualification,setQualification]=useState('')
-  const[fee,setFee]=useState('')
-  const[gender,setGender]=useState('')
-  const[rollno,setRollno]=useState('')
-  const[batchName,setBatchName]=useState('')
-  const[joindate,setJoinDate]=useState("")
-  const[address,setAddress]=useState("")
-  const [classes,setClasses]=useState([])
+  const navigate = useNavigate();
 
-  const navigate=useNavigate()
-
-  const data={
+  const data = {
     name,
     email,
     phone,
@@ -29,97 +28,160 @@ const Student = () => {
     rollno,
     batchName,
     joindate,
-    address
-  }
+    address,
+  };
 
-
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-    const res=await axios.post("http://localhost:3005/students/post",data)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await axios.post('http://localhost:3005/students/post', data);
     console.log(res);
-    if(res.status===200){
-      alert("data added")
-      navigate("/studentDataShow")
+    if (res.status === 200) {
+      alert('Data added');
+      navigate('/studentDataShow');
     }
-    
-  }
-  useEffect(()=>{
-    classFetch()
-  },[])
+  };
 
-  const classFetch=async()=>{
-    const response=await axios.get("http://localhost:3005/class/getall")
+  useEffect(() => {
+    classFetch();
+  }, []);
+
+  const classFetch = async () => {
+    const response = await axios.get('http://localhost:3005/class/getall');
+    console.log(response.data.map((item)=>item.batchName));
+
     console.log(response.data);
-    setClasses(response.data)
-  }
+    setClasses(response.data);
+  };
 
-  const handleBatchselect=(e)=>{
-    setBatchName(e.target.value)
-  }
-  
+  const handleBatchselect = (e) => {
+    setBatchName(e.target.value);
+  };
+
   return (
-    <div>
-      <h1>Student</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <h1 className="form-title">Create Student</h1>
 
-      <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">Name</label>
-    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={name} onChange={(e)=>setName(e.target.value)}/>
-  </div>
-  <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e)=>setEmail(e.target.value)} />
-  </div>
+      <form onSubmit={handleSubmit} className="form-class">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
 
-  <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">phone</label>
-    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={phone} onChange={(e)=>setPhone(e.target.value)} />
-  </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">Email Address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">qualification</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" value={qualification} onChange={(e)=>setQualification(e.target.value)} />
-  </div>
-  
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">fee</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" value={fee} onChange={(e)=>setFee(e.target.value)} />
-  </div>
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">gender</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" value={gender} onChange={(e)=>setGender(e.target.value)} />
-  </div>
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">rollno</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" value={rollno} onChange={(e)=>setRollno(e.target.value)} />
-  </div>
+        <div className="mb-3">
+          <label htmlFor="phone" className="form-label">Phone</label>
+          <input
+            type="text"
+            className="form-control"
+            id="phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
 
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">batchname</label>
-    <select onChange={handleBatchselect} value={batchName}>
-      <option value="">select batch</option>
-      {
-        classes.map((item)=>(
-          <option key={item.id} value={item._id}>{item.batchName}</option>
-        ))
-      }
-    </select>
-  </div>
+        <div className="mb-3">
+          <label htmlFor="qualification" className="form-label">Qualification</label>
+          <input
+            type="text"
+            className="form-control"
+            id="qualification"
+            value={qualification}
+            onChange={(e) => setQualification(e.target.value)}
+          />
+        </div>
 
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">joindate</label>
-    <input type="date" className="form-control" id="exampleInputPassword1" value={joindate} onChange={(e)=>setJoinDate(e.target.value)} />
-  </div>
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">address</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" value={address} onChange={(e)=>setAddress(e.target.value)} />
-  </div>
-  <button type="submit" className="btn btn-primary">create student</button>
-</form>
+        <div className="mb-3">
+          <label htmlFor="fee" className="form-label">Fee</label>
+          <input
+            type="text"
+            className="form-control"
+            id="fee"
+            value={fee}
+            onChange={(e) => setFee(e.target.value)}
+          />
+        </div>
 
+        <div className="mb-3">
+          <label htmlFor="gender" className="form-label">Gender</label>
+          <input
+            type="text"
+            className="form-control"
+            id="gender"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
+        </div>
 
+        <div className="mb-3">
+          <label htmlFor="rollno" className="form-label">Roll Number</label>
+          <input
+            type="text"
+            className="form-control"
+            id="rollno"
+            value={rollno}
+            onChange={(e) => setRollno(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="batchName" className="form-label">Batch Name</label>
+          <select
+            className="form-select"
+            id="batchName"
+            onChange={handleBatchselect}
+            value={batchName}
+          >
+            <option value="">Select Batch</option>
+            {classes.map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.batchName}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="joindate" className="form-label">Join Date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="joindate"
+            value={joindate}
+            onChange={(e) => setJoinDate(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="address" className="form-label">Address</label>
+          <input
+            type="text"
+            className="form-control"
+            id="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary">Create Student</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Student
+export default Student;

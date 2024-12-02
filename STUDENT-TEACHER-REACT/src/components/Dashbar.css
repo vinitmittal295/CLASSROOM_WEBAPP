@@ -1,68 +1,105 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Overall container */
 .dashbar-container {
-    background-color: #f8f9fa;
-  }
-  
-  .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .navbar-nav .nav-link {
-    margin-right: 1rem;
-  }
-  
-  .navbar-nav .nav-link:hover {
-    color: #f39c12;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-item .dropdown-menu {
-    background-color: white;
-    color: black;
-  }
-  
-  .nav-item .dropdown-item:hover {
-    background-color: white;
-    color: #f39c12;
+  display: flex;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #343a40;
+  color: #fff;
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: all 0.3s;
+}
+
+/* Sidebar header */
+.sidebar-header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Sidebar menu */
+.sidebar-menu {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar-menu li {
+  padding: 10px;
+}
+
+.sidebar-menu li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.sidebar-menu li a:hover {
+  background-color: #495057;
+}
+
+.sidebar-menu li .dropdown-menu {
+  list-style: none;
+  padding-left: 20px;
+  display: none;
+}
+
+.sidebar-menu li .dropdown-menu li {
+  padding: 5px 0;
+}
+
+.sidebar-menu li:hover .dropdown-menu {
+  display: block;
+}
+
+/* Disabled state for menu items */
+.sidebar-menu li .disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Main content area */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
   }
 
-  .dashboard-content {
-    padding: 2rem
+  .content {
+    margin-left: 0;
   }
-  
-  .dashboard-title {
-    font-size: 2.5rem;
-    color: #343a40;
-  }
-  
-  .card {
-    border: none;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: translateY(-10px);
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  
-  .card i {
-    color: #6c757d;
-  }
-  
-  .btn {
-    margin-top: 1rem;
-    font-weight: bold;
-  }
-  
-  .btn-outline-primary:hover, 
-  .btn-outline-success:hover, 
-  .btn-outline-danger:hover {
-    color: white;
-    background-color: currentColor;
-  }
-  
+}
