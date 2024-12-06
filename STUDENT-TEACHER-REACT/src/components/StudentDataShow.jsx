@@ -102,7 +102,8 @@ const StudentDataShow = () => {
                         <button onClick={closeModal} style={closeButtonStyle}>Close</button>
                     </div>
                 </div>
-            )}
+            )
+            }
         </div>
     );
 };

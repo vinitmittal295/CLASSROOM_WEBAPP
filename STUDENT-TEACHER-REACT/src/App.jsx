@@ -30,6 +30,7 @@ function App() {
     <Route path="/classdata" element={<ClassDataShow/>}></Route>
     <Route path="/login" element={<Login/>}></Route>
     <Route path="/dashboard" element={<Dashboard/>}></Route>
+
     </Routes>
     </BrowserRouter>
     </>

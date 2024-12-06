@@ -47,6 +47,7 @@ const Dashbar = () => {
           <li><Link to="/login"><i className="fas fa-sign-in-alt"></i> Login</Link></li>
           <li><Link to="/Dashboard"><i className="fas fa-tachometer-alt"></i> Dashboard</Link></li>
           <li><Link to="/signup"><i className="fas fa-user-plus"></i> Signup</Link></li>
+          <li><Link to="/signup"><i className="fas fa-user-plus"></i> LogOut</Link></li>
         </ul>
       </div>
       
